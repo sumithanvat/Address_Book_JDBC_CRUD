@@ -14,13 +14,13 @@ public class AddressBookSystem {
 
             // Update Entry
                 try (Statement statement = connection.createStatement()) {
-                    String updateQuery = "update address_book2 set phone = '7581800900'";
-                    int rowsAffected = statement.executeUpdate(updateQuery);
+                    String deleteQuery = "delete from address_book2 where first_name = 'Sumit'";
+                    int rowsAffected = statement.executeUpdate(deleteQuery);
 
                     if (rowsAffected > 0) {
-                        System.out.println("Entry updated successfully");
+                        System.out.println("Entry Delete successfully");
                     } else {
-                        System.out.println("No entry found to update");
+                        System.out.println("No entry found to Delete");
                     }
                 }
             } catch (SQLException e) {

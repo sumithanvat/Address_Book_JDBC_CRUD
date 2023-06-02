@@ -12,38 +12,19 @@ public class AddressBookSystem {
 
         try (Connection connection = DriverManager.getConnection(url, username, password)) {
 
-            // Update query
-            try (Statement statement = connection.createStatement()){
-                String selectQuery = "select * from address_book2";
-                ResultSet resultSet = statement.executeQuery(selectQuery);
+            // Update Entry
+                try (Statement statement = connection.createStatement()) {
+                    String updateQuery = "update address_book2 set phone = '7581800900'";
+                    int rowsAffected = statement.executeUpdate(updateQuery);
 
-                // Iterate over result set
-                while (resultSet.next()){
-                    int id = resultSet.getInt(1);
-                    String first_name = resultSet.getString(2);
-                    String last_name = resultSet.getString(3);
-                    String address = resultSet.getString(4);
-                    String city = resultSet.getString(5);
-                    String state = resultSet.getString(6);
-                    int zip = resultSet.getInt(7);
-                    String phone = resultSet.getString(8);
-                    String email = resultSet.getString(9);
-
-                    // Print the retrieved values
-                    System.out.println("ID: " + id);
-                    System.out.println("First Name: " + first_name);
-                    System.out.println("Last Name: " + last_name);
-                    System.out.println("Address: " + address);
-                    System.out.println("City: " + city);
-                    System.out.println("State: " + state);
-                    System.out.println("ZIP: " + zip);
-                    System.out.println("Phone: " + phone);
-                    System.out.println("Email: " + email);
+                    if (rowsAffected > 0) {
+                        System.out.println("Entry updated successfully");
+                    } else {
+                        System.out.println("No entry found to update");
+                    }
                 }
-
+            } catch (SQLException e) {
+                e.printStackTrace();
             }
-        } catch (SQLException e) {
-            e.printStackTrace();
         }
     }
-}
